@@ -12,20 +12,35 @@ const std::string kCmdlineFilename{"/cmdline"};
 const std::string kCpuinfoFilename{"/cpuinfo"};
 const std::string kStatusFilename{"/status"};
 const std::string kStatFilename{"/stat"};
-const std::string kUptimeFilename{"/uptime"};
+const std::string kUptimeFilename{"uptime"};
 const std::string kMeminfoFilename{"/meminfo"};
 const std::string kVersionFilename{"/version"};
 const std::string kOSPath{"/etc/os-release"};
 const std::string kPasswordPath{"/etc/passwd"};
 
 // System
-float MemoryUtilization();
-long UpTime();
-std::vector<int> Pids();
-int TotalProcesses();
-int RunningProcesses();
-std::string OperatingSystem();
-std::string Kernel();
+std::string OperatingSystem();              // DONE
+std::string Kernel();                       // DONE
+std::vector<int> Pids();                    // DONE
+float MemoryUtilization();                  // DONE
+long UpTime();                              // DONE
+
+//Process
+long Jiffies();                             // UNUSED
+long ActiveJiffies(int pid);                // DONE
+long ActiveJiffies();                       // DONE
+long IdleJiffies(int pid);                  // DONE
+std::vector<std::string> CpuUtilization();  // UNUSED
+int TotalProcesses();                       // DONE
+int RunningProcesses();                     // DONE
+
+// Processes
+std::string Command(int pid);   // DONE
+std::string Ram(int pid);       // DONE
+std::string Uid(int pid);       // DONE
+std::string User(int pid);      // DONE
+long int UpTime(int pid);       // DONE
+};  // namespace LinuxParser
 
 // CPU
 enum CPUStates {
@@ -40,18 +55,5 @@ enum CPUStates {
   kGuest_,
   kGuestNice_
 };
-std::vector<std::string> CpuUtilization();
-long Jiffies();
-long ActiveJiffies();
-long ActiveJiffies(int pid);
-long IdleJiffies();
-
-// Processes
-std::string Command(int pid);
-std::string Ram(int pid);
-std::string Uid(int pid);
-std::string User(int pid);
-long int UpTime(int pid);
-};  // namespace LinuxParser
 
 #endif
